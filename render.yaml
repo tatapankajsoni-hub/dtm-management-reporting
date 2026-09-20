@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: dtm-management-reporting
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -c "import os,uvicorn; uvicorn.run('main:app',host='0.0.0.0',port=int(os.environ.get('PORT','10000')))"
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: DTM_ADMIN_KEY
+        sync: false
+      - key: PYTHON_VERSION
+        value: 3.13.5
